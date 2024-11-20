@@ -7,7 +7,7 @@ import { Proveedor } from "./FinalFIP/Proveedor";
 export class Veterinaria extends DatosBase{
        
   private email:string;
-  private listaCLientes:Cliente[]=[];
+  private listaClientes:Cliente[]=[];    // modifique Clientes de CL
   private listaProveedores:Proveedor[]=[];
 
 
@@ -27,8 +27,8 @@ export class Veterinaria extends DatosBase{
 
             public altaCliente(nuevoCliente:Cliente):void{
                   // let nuevoCliente= new Cliente(id,nombre,direccion,telefono,email) 
-                if (!this.listaCLientes.some(Cliente=>Cliente===nuevoCliente)){
-                  this.listaCLientes.push(nuevoCliente);
+                if (!this.listaClientes.some(Cliente=>Cliente===nuevoCliente)){
+                  this.listaClientes.push(nuevoCliente);
                 } else {
                   console.log(" El cliente ya existe");
                 }
@@ -47,15 +47,15 @@ export class Veterinaria extends DatosBase{
                 
               
     public bajaCliente (clienteAEliminar:Cliente): void{
-      if (clienteAEliminar != undefined && this.listaCLientes.includes(clienteAEliminar)){
-        let posicionCliente:number =this.listaCLientes.indexOf(clienteAEliminar);
-        this.listaCLientes.splice(posicionCliente,1)
+      if (clienteAEliminar != undefined && this.listaClientes.includes(clienteAEliminar)){
+        let posicionCliente:number =this.listaClientes.indexOf(clienteAEliminar);
+        this.listaClientes.splice(posicionCliente,1)
       }
 
     }
 
   
-    public bajaProvedor (ProveedorAEliminar:Proveedor): void{
+    public bajaProveedor (ProveedorAEliminar:Proveedor): void{  // modifique a bajaProvee
       if (ProveedorAEliminar != undefined && this.listaProveedores.includes(ProveedorAEliminar)){
         let posicionProveedor:number =this.listaProveedores.indexOf(ProveedorAEliminar);
         this.listaProveedores.splice(posicionProveedor,1)
@@ -67,7 +67,7 @@ export class Veterinaria extends DatosBase{
 
 
 public modificarCliente(nuevosDatos:Cliente): void {
-   let cliente= this.listaCLientes.find(cliente=> cliente === cliente);
+   let cliente= this.listaClientes.find(cliente=> cliente === nuevosDatos); // cambie a nuevos datos
     Object.assign(cliente, nuevosDatos);
     console.log(`Cliente ${cliente.nombre} modificado correctamente.`);
 }
@@ -75,7 +75,7 @@ public modificarCliente(nuevosDatos:Cliente): void {
 
 
 public modificarProveedor(nuevosDatos:Proveedor): void {
-  let proveedor= this.listaProveedores.find(prov=> prov === proveedor);
+  let proveedor= this.listaProveedores.find(prov=> prov === nuevosDatos); // cambie a nuevos datos
    Object.assign(proveedor, nuevosDatos);
    console.log(`Proveedor ${proveedor.nombre} modificado correctamente.`);
 }
